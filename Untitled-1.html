@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Ultra Sophistiquée</title>
+    <style>
+        /* Styles CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, rgba(255, 0, 153, 0.493), #9900ff);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #ffffff; /* Or couleur dorée pour les titres */
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button, textarea {
+            width: 90%;
+            padding: 8px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input, textarea {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        button {
+            background-color: #e681ff00; /* Nouveau bleu pour les boutons */
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #cc00ff; /* Bleu plus foncé au survol */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Section Inscription -->
+    <h2>Inscription</h2>
+    <form id="formInscription" onsubmit="inscrire(event)">
+        <input type="text" id="inscriptionUsername" placeholder="Nom d'utilisateur" required>
+        <input type="password" id="inscriptionPassword" placeholder="Mot de passe" required>
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <!-- Section Connexion -->
+    <h2>Connexion</h2>
+    <form id="formConnexion" onsubmit="connecter(event)">
+        <input type="text" id="connexionUsername" placeholder="Nom d'utilisateur" required>
+        <input type="password" id="connexionPassword" placeholder="Mot de passe" required>
+        <button type="submit">Se connecter</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript pour gérer l'inscription, la connexion et le questionnaire
+    function inscrire(event) {
+        event.preventDefault();
+        const username = document.getElementById("inscriptionUsername").value;
+        const password = document.getElementById("inscriptionPassword").value;
+        
+        // Sauvegarde basique dans le localStorage
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+    }
+
+    function connecter(event) {
+        event.preventDefault();
+        const username = document.getElementById("connexionUsername").value;
+        const password = document.getElementById("connexionPassword").value;
+
+        // Vérification des informations d'identification
+        const savedUsername = localStorage.getItem("username");
+        const savedPassword = localStorage.getItem("password");
+
+        if (username === savedUsername && password === savedPassword) {
+            alert("Connexion réussie !");
+            document.getElementById("formQuestionnaire").classList.remove("hidden");
+        } else {
+            alert("Nom d'utilisateur ou mot de passe incorrect.");
+        }
+    }
+
+    function envoyerQuestionnaire(event) {
+        event.preventDefault();
+        const question1 = document.getElementById("question1").value;
+        const question2 = document.getElementById("question2").value;
+        alert(`Questionnaire envoyé :\n1. ${question1}\n2. ${question2}`);
+        document.getElementById("formQuestionnaire").reset();
+    }
+</script>
+
+</body>
+</html>
